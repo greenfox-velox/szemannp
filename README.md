@@ -1,3 +1,3 @@
 # szemannp
 
-Here's the link from my cloned repo: https://github.com/szemannp/velox-syllabus
+Here's the link for my cloned repo: https://github.com/szemannp/velox-syllabus
