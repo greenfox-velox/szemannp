@@ -1,0 +1,13 @@
+
+section {
+  font-size: 18px;
+  border: 2px solid black;
+  width: 300px;
+  padding: 20px;
+  margin: 0;
+  border-top: 0;
+}
+
+.bottom_session {
+  border-bottom: 0;
+}
