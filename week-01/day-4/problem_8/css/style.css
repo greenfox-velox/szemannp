@@ -1,0 +1,20 @@
+
+section {
+  font-size: 18px;
+  border: 2px solid black;
+  width: 300px;
+  padding: 40px;
+  margin: 0;
+}
+
+.left_bgrnd {
+  background: url('../duck.png') no-repeat left center;
+}
+
+.center_bgrnd {
+  background: url('../duck.png') no-repeat center center;
+}
+
+.right_bgrnd {
+  background: url('../duck.png') no-repeat right bottom;
+}
