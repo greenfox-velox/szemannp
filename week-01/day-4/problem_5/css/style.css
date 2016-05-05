@@ -1,0 +1,15 @@
+h1, .outer {
+  color: blue;
+}
+
+h2 {
+  color: #ffd700;
+}
+
+span {
+  color: red;
+}
+
+.inner, .ordered {
+  color: black;
+}
