@@ -1,0 +1,21 @@
+
+body{
+  color: blue;
+  font-size: 30px;
+}
+
+.include {
+  width: 250px;
+  height: 250px;
+  margin: 10px 20px;
+  padding: 20px;
+  background-color: darkgreen;
+}
+
+.box {
+  margin: 0px;
+  padding: 20px;
+  border: 5px solid black;
+  width: 200px;
+  background: yellow;
+}
