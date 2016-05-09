@@ -1,0 +1,40 @@
+* {
+  font-family: verdana;
+  margin: 0;
+}
+
+.wrapper{
+  max-width: 380px;
+  max-height: 550px;
+  background: white;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: justify;
+  padding: 15px 50px 30px 0px;
+}
+
+hr {
+  width: auto;
+  margin: 20px 0px;
+  height: 3px;
+  border: black;
+  background: black;
+  box-sizing: border-box;
+}
+
+.wrapper::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.image-1 {
+  float: left;
+  margin: 20px;
+}
+
+.image-2 {
+  float: right;
+  margin: 20px;
+}
