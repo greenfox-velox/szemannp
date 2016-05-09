@@ -1,0 +1,45 @@
+body {
+  width: 100%;
+  margin: auto;
+}
+
+header {
+  height: 100px;
+  background: turquoise;
+}
+
+section {
+  height: 500px;
+  display: flex;
+}
+
+nav {
+  width: 100px;
+  background: orange;
+}
+main {
+  width: 100%;
+  position: relative;
+  margin: 0 20px;
+  background: red;
+}
+
+.black-box {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+
+}
+
+aside {
+  width: 100px;
+  background: purple;
+}
+
+footer {
+  height: 100px;
+  background: blue;
+}
