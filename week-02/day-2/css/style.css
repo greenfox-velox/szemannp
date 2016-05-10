@@ -1,3 +1,35 @@
+form {
+  form 
+  margin 0 auto;
+  width: 820px;
+  padding: 1em;
+  background-color: #e6e6ff;
+  font-family: Helvetica;
+  line-height: 1.5em;
+}
+
 span {
   color: red;
 }
+
+.wrapper {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: flex-start
+}
+
+.left-column {
+  
+}
+
+.left-column, .right-column {
+  height: 420px;
+  width: 300px;
+}
+
+
+
+
+
