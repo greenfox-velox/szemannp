@@ -279,6 +279,7 @@ li ol > li:before {
 
 .table-of-content li {
   padding-left: 5px;
+  color: #0645ad;
 }
 
 .table-of-content li li {
@@ -292,4 +293,39 @@ li ol > li:before {
   color: black;
 }
 
+
+
+footer {
+  height: 160px;
+  position: relative;
+  bottom: -30px;
+  display: block;
+  background: #F6F6F6;
+  font-size: 11px;
+  margin-left: 13.1em;
+  margin-top: 5em;
+}
+
+.footer-mod {
+  padding-top: 3em;
+}
+
+.footer-mod, .footer-copyright, .footer-links-container {
+  width: auto;
+  padding-left: 25px;
+  padding-top: 15px;
+}
+
+.footer-links {
+  padding: 6px 0;
+  margin-right: 10px;
+}
+
+.footer-icons {
+  position: absolute;
+  right: 0;
+  bottom: 15px;
+  margin: 0 10px 20px 0;
+  width: 187px;
+}
 
