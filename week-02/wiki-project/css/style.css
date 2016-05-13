@@ -1,5 +1,8 @@
 body {
   background-color: #f6f6f6;
+  background: -moz-linear-gradient(bottom, #f6f6f6 97%, #ffffff 99%); 
+  background: -webkit-linear-gradient(top, #f6f6f6 97%,#ffffff 99%);
+  background: linear-gradient(to top, #f6f6f6 97%,#ffffff 99%);
 }
 
 html, body {
@@ -8,7 +11,7 @@ html, body {
   margin: 0;
   font-family: sans-serif;
   line-height: 1.6;
-  font-size: 14px;
+  font-size: 14px; 
 }
 
 body section {
@@ -20,7 +23,7 @@ body h3 {
   margin-top: 1em;
 }
 
-h2 {
+h1, h2 {
   border-bottom: 1px solid #aaa;
   font-weight: normal;
   overflow: hidden;
@@ -33,7 +36,7 @@ header {
   left: 0;
   width: 100%;
   height: 80px;
-  font-size: 0.85em;
+  font-size: 0.85em;  
 }
 
 a {
@@ -96,7 +99,7 @@ a:hover {
   clear: left;
   height: 2.5em;
   margin-top: 3.5em;
-  margin-left: 10em;
+  margin-left: 10.5em;
 }
 
 .left-links li {
@@ -110,6 +113,7 @@ a:hover {
   clear: left;
   height: 100%;
   width: 10em;
+  margin-left: 1em;
   left: 0;
   line-height: 1.125em;
 }
@@ -129,7 +133,8 @@ a:hover {
 .left-nav h3 {
   font-size: 0.85em;
   font-weight: normal;
-  color: dimgray; 
+  color: dimgray;
+  border-top: 1px solid #aaa;
 }
 
 .aside-container > .aside-titles  {
@@ -155,7 +160,7 @@ article {
   display: block;
   position: relative;
   top: 80px;
-  margin-left: 10.25em;
+  margin-left: 11.25em;
   padding: 1em;
   border: 1px solid #a7d7f9;
   border-right-width: 0;
@@ -292,9 +297,6 @@ li ol > li:before {
 .article-list span {
   color: black;
 }
-
-
-
 footer {
   height: 160px;
   position: relative;
@@ -328,4 +330,3 @@ footer {
   margin: 0 10px 20px 0;
   width: 187px;
 }
-
