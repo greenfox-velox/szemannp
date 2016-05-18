@@ -14,6 +14,6 @@ elif len(aa) == 2:
 elif len(aa) > 2:
     out = 10
 
-elif len(aa) == 0
+elif len(aa) == 0:
     out = -1
 print(out)
