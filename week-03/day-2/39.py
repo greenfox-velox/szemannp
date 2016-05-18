@@ -6,6 +6,6 @@ def short_string_func(input_list):
     for i in range(len(input_list)):
         if len(input_list[i - 1]) > len(input_list[i]):
             minLength = input_list[i]
-    print(minLength)
+    return minLength
 
-short_string_func(names)
+print(short_string_func(names))

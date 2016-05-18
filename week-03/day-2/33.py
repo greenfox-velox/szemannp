@@ -4,6 +4,6 @@ ag = 'kuty'
 
 def appending_function(input):
     newString = input + "a"
-    print(newString)
+    return newString
 
-appending_function(ag)
+print(appending_function(ag))

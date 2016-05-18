@@ -6,6 +6,6 @@ def own_min_list(input_list):
     for i in range(len(input_list)):
         if input_list[i - 1] > input_list[i]:
             minItem = input_list[i]
-    print(minItem)
+    return minItem
 
-own_min_list(numbers)
+print(own_min_list(numbers))

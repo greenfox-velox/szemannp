@@ -11,6 +11,6 @@ def sort_list_funct(input_list):
         else:
             newList.append(input_list[i])
             i += 1
-    print(newList)
+    return newList
 
-sort_list_funct(numbers)
+print(sort_list_funct(numbers))

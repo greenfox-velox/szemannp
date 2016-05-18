@@ -2,6 +2,6 @@ ae = 'Jozsi'
 # create a function that greets ae
 
 def greeting_function(name):
-    print("Greetings,", name)
+    return "Greetings, " +name
 
-greeting_function(ae)
+print(greeting_function(ae))

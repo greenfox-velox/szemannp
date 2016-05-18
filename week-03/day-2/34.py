@@ -4,6 +4,6 @@ def summarize_function(list):
     sumall = 0
     for i in range(len(list)):
         sumall += list[i]
-    print(sumall)
+    return sumall
 
-summarize_function(numbers)
+print(summarize_function(numbers))

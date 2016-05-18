@@ -4,6 +4,6 @@ af = 123
 
 def duplicating_function(input):
     newValue = input * 2
-    print(newValue)
+    return newValue
 
-duplicating_function(af)
+print(duplicating_function(af))
