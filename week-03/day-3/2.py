@@ -5,7 +5,19 @@
 # It should have a method called "run" that takes a number and increments the "km" property by it
 
 
+
+
+class Car:
+    def __init__(self, type, km):
+        self.type = type
+        self.km = km
+
+    def run(self, ride):
+        self.ride = ride
+        self.km += self.ride
+        return self.km
+
 my_mazda = Car("mazda", 12000)
-my_mazda.ride(100)
+my_mazda.run(100)
 print(my_mazda.type) # "mazda"
 print(my_mazda.km) # 12100
