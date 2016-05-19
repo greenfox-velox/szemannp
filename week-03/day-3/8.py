@@ -13,8 +13,11 @@ class Person:
     def greet_person(self):
         return "Greetings, " +self.first_name +self.last_name
 
-class Student(Person):
-    def __
+class Student:
+    def __init__(self):
+        Person.__init__(self, first_name, last_name)
+        self.grade_list = []
+        self.avarage = None
     def add_grade(self, grade):
         self.grade = grade
         if self.grade < 1:
@@ -26,13 +29,31 @@ class Student(Person):
             return self.grade_list
 
     def salute(self):
-        self.avarage = sum(self.grade_list) / len(self.grade_list)
-        return "Greetings, " +self.first_name, +self.last_name ", my avarage is" self.avarage
+        super(Student, self).greet_person()
+        # self.avarage = sum(self.grade_list) / len(self.grade_list)
+        # return self.avarage
+
+# class Student(Person):
+#     def __init__(Person):
+#         pass
+#     def add_grade(self, grade):
+#         self.grade = grade
+#         if self.grade < 1:
+#             return("Invalid value!")
+#         elif self.grade > 5:
+#             return("Invalid value!")
+#         else:
+#             self.grade_list.append(self.grade)
+#             return self.grade_list
+
+    # def salute(self):
+    #     self.avarage = sum(self.grade_list) / len(self.grade_list)
+    #     return "Greetings, " +self.first_name, +self.last_name ", my avarage is" +self.avarage
 
 majom = Person('Saf ', 'Ranek')
 csimpi = Student
 print(majom.greet_person())
-print(csimpi.add_grade(5))
-print(csimpi.add_grade(4))
-print(csimpi.add_grade(1))
-print(csimpi.)
+# print(csimpi.add_grade(5))
+# print(csimpi.add_grade(4))
+# print(csimpi.add_grade(1))
+print(csimpi.salute)
