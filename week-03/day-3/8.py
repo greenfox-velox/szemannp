@@ -14,8 +14,25 @@ class Person:
         return "Greetings, " +self.first_name +self.last_name
 
 class Student(Person):
-    
+    def __
+    def add_grade(self, grade):
+        self.grade = grade
+        if self.grade < 1:
+            return("Invalid value!")
+        elif self.grade > 5:
+            return("Invalid value!")
+        else:
+            self.grade_list.append(self.grade)
+            return self.grade_list
 
-majom = Person('Tekis ', 'Majom')
+    def salute(self):
+        self.avarage = sum(self.grade_list) / len(self.grade_list)
+        return "Greetings, " +self.first_name, +self.last_name ", my avarage is" self.avarage
 
+majom = Person('Saf ', 'Ranek')
+csimpi = Student
 print(majom.greet_person())
+print(csimpi.add_grade(5))
+print(csimpi.add_grade(4))
+print(csimpi.add_grade(1))
+print(csimpi.)
