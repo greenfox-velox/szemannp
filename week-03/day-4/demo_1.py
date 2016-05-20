@@ -4,8 +4,8 @@ def get_palindrome(input):
     for i in range(len(input)):
         container = input[-x]
         result += container
-        container = None
         x +=1
+        container = None
     return result
 
 print(get_palindrome('safranek'))
