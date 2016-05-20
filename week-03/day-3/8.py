@@ -14,10 +14,11 @@ class Person:
         return "Greetings, " +self.first_name +self.last_name
 
 class Student:
-    def __init__(self):
-        Person.__init__(self, first_name, last_name)
+    def __init__(self, first_name, last_name):
+        super().__init__(first_name, last_name)
         self.grade_list = []
         self.avarage = None
+        Person.__init__(self)
     def add_grade(self, grade):
         self.grade = grade
         if self.grade < 1:
