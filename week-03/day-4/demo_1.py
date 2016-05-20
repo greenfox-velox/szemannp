@@ -1,10 +1,10 @@
 def get_palindrome(input):
-    x = 1
     result = input
+    x = 1
     for i in range(len(input)):
-        palindrome = input[-x]
-        result += palindrome
-        palindrome = None
+        container = input[-x]
+        result += container
+        container = None
         x +=1
     return result
 
