@@ -17,7 +17,7 @@ canvas.pack()
 def draw_square(a):
     canvas.create_rectangle(canvas_width / 2 - a / 2, canvas_height / 2 - a / 2, canvas_width / 2 + a / 2, canvas_height / 2 + a / 2)
 
-for i in range(5, 206, 10):
+for i in range(5, 216, 10):
     draw_square(i)
 
 
