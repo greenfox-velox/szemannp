@@ -5,7 +5,9 @@
 # multiplication).
 
 def get_bunny_ears_in_line(bunnies_in_line):
-    if bunnies_in_line == 1:
-        return 3
+    if bunnies_in_line <= 2:
+        return 5
     else:
-        return
+        return 5 + get_bunny_ears_in_line(bunnies_in_line - 2)
+
+print(get_bunny_ears_in_line(10))
