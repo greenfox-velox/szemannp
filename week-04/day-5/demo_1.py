@@ -3,7 +3,7 @@ from math import *
 
 root = Tk()
 
-size = 6000
+size = 600
 
 canvas = Canvas(root, width = size, height = size, bg = 'blue')
 canvas.pack()
@@ -20,6 +20,6 @@ def fract_triangle(x, y, size):
         fract_triangle(x + size / 2, y, size / 2)
         fract_triangle(x + size / 4, y + size / 4 * sqrt(3), size / 2)
 
-fract_triangle(1, 1, 6000)
+fract_triangle(1, 1, 600)
 
 root.mainloop()

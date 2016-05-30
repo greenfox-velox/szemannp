@@ -25,9 +25,7 @@ def draw_triangle(x, y, size):
 
 def fract_triangle(x, y, size):
     draw_triangle(x, y, size)
-    if size <= 5:
-        pass
-    else:
+    if size > 5:
         fract_triangle(x, y, size /2)
         fract_triangle(x + size / 2, y, size / 2)
         fract_triangle(x + size / 4, y + size / 4 * sqrt(3), size / 2)
