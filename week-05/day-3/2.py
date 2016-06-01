@@ -7,4 +7,5 @@ def get_amount_of_lines(file_name):
         return num_lines
     except FileNotFoundError:
         return '0'
+    file_name.close()
 print(get_amount_of_lines('linecont.txt'))
