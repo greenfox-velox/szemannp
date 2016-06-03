@@ -56,7 +56,7 @@ class ToDo():
             file_todo.close()
         else:
             print('Unable to add, no new task was given')
-        print('New task successfully added')
+        print('\nNew task successfully added')
         print(self.get_todo_list())
         return
 
@@ -86,7 +86,7 @@ class ToDo():
         with open("todo_list.txt","w") as file_todo:
             for n in todo_list:
                 file_todo.write(n)
-        print('Task successfully removed!')
+        print('\nTask successfully removed!')
         print(self.get_todo_list())
         return
 

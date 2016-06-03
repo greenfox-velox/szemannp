@@ -1,0 +1,9 @@
+
+Python Todo application
+=======================
+
+Command line arguments:
+ -l   Lists all the tasks | No further arguments required
+ -a   Adds a new task | Add new task in between quotation marks: "Practice Python"
+ -r   Removes a task | Remove an item with it's list index NUMBER
+ -c   Completes a task | Mark a task as completed with it's index NUMBER
