@@ -4,7 +4,7 @@ from random import randint
 main = Tk()
 
 canvas = Canvas(main, width = 720, height = 720)
-
+board_size = 10
 
 
 level_1_board = [[0, 0, 0, 2, 0, 2, 0, 2, 2, 0],
@@ -32,30 +32,26 @@ level_1_spawn_locations = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 5],
 
 class Validator(object):
 
-    def __init__(self, vertical, horizontal):
+    def __init__(self, horizontal, vertical):
         self.horizontal = horizontal
         self.vertical = vertical
 
-    def validate_hero_left(self):
-        if hero.horizontal > 0:
-            hero.horizontal -= 1
-            hero.hero_move_left()
+    def validate_move_left(self):
+        if level_1_board[self.horizontal][self.vertical - 1] == 0 and self.vertical > 0:
+            return True
 
-    def validate_hero_right(self):
-        if hero.horizontal < 9:
-            hero.horizontal += 1
-            hero.hero_move_right()
+    def validate_move_right(self):
+        if level_1_board[self.horizontal][self.vertical + 1] == 0 and self.vertical < 9:
+            return True
 
-    def validate_hero_up(self):
-        if hero.vertical > 0:
-            hero.vertical -= 1
-            hero.hero_move_up()
+    def validate_move_up(self):
+        if level_1_board[self.horizontal - 1][self.vertical] == 0 and self.horizontal > 0:
+            return True
 
 
-    def validate_hero_down(self):
-        if hero.vertical < 10:
-            hero.vertical += 1
-            hero.hero_move_down()
+    def validate_move_down(self):
+        if level_1_board[self.horizontal + 1][self.vertical] == 0 and self.horizontal < 9:
+            return True
 
 class PlayField(object):
 
@@ -119,7 +115,7 @@ class Character(object):
     def draw(self, pic):
         canvas.create_image(self.vertical * self.size, self.horizontal * self.size, image = pic, anchor = NW)
 
-class Hero(Character):
+class Hero(Character, Validator):
 
     def __init__(self, horizontal, vertical, playfield):
         # self.health = 0
@@ -128,7 +124,8 @@ class Hero(Character):
         # self.playfield = level_1_board
         self.hero_spawn = PhotoImage(file = 'assets/hero-down.png')
         self.hero_image = PhotoImage(file = 'assets/hero-down.png')
-        super().__init__(horizontal, vertical, canvas)
+        super().__init__(horizontal, vertical, playfield)
+        super().__init__(horizontal, vertical, playfield)
 
     def spawn(self):
         super().draw(self.hero_spawn)
@@ -137,7 +134,7 @@ class Hero(Character):
         self.hero_image = PhotoImage(file = 'assets/hero-down.png')
 
     def hero_move_left(self, event):
-        if level_1_board[self.horizontal][self.vertical - 1] != 2 and self.vertical > 0:
+        if self.validate_move_left() == True:
             self.hero_image = PhotoImage(file = 'assets/hero-left.png')
             self.vertical -= 1
             super().draw(self.hero_image)
@@ -145,7 +142,7 @@ class Hero(Character):
             self.hero_nomove()
 
     def hero_move_right(self, event):
-        if level_1_board[self.horizontal][self.vertical + 1] != 2 and self.vertical < 9:
+        if self.validate_move_right() == True:
             self.hero_image = PhotoImage(file = 'assets/hero-right.png')
             self.vertical += 1
             super().draw(self.hero_image)
@@ -153,7 +150,7 @@ class Hero(Character):
             self.hero_nomove()
 
     def hero_move_up(self, event):
-        if level_1_board[self.horizontal - 1][self.vertical] != 2 and self.horizontal > 0:
+        if self.validate_move_up() == True:
             self.hero_image = PhotoImage(file = 'assets/hero-up.png')
             self.horizontal -= 1
             super().draw(self.hero_image)
@@ -161,7 +158,7 @@ class Hero(Character):
             self.hero_nomove()
 
     def hero_move_down(self, event):
-        if level_1_board[self.horizontal + 1][self.vertical] != 2 and self.horizontal < 9:
+        if self.validate_move_down() == True:
             self.hero_image = PhotoImage(file = 'assets/hero-down.png')
             self.horizontal += 1
             super().draw(self.hero_image)
@@ -172,21 +169,21 @@ class Hero(Character):
         self.horizontal += 0
         self.vertical += 0
 
-# class TrashMob(Character):
-#
-#     def __init__():
-#         self.health =
-#         self.strike =
-#         self.defense =
-#
-#     def draw(self):
-#
+class TrashMob(Character):
+
+    def __init__(self):
+        self.health = 0
+        self.strike = 0
+        self.defense = 0
+
+    # def draw(self):
+
 # class Boss(Character):
 #
-#     def __init__():
-#         self.health =
-#         self.strike =
-#         self.defense =
+#     def __init__(self):
+#         self.health = 0
+#         self.strike = 0
+#         self.defense = 0
 #
 #     def draw(self):
 
@@ -195,7 +192,7 @@ wanderer = PlayField(level_1_board)
 wanderer.set_playfield()
 wanderer.print_playfield()
 majom = Hero(0, 0, main)
-majom.spawn()
+majom.draw()
 
 main.bind('<Down>', majom.hero_move_down)
 main.bind('<Up>', majom.hero_move_up)
