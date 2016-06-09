@@ -6,29 +6,16 @@ main = Tk()
 canvas = Canvas(main, width = 720, height = 720)
 board_size = 10
 
-
-level_1_board = [[0, 0, 0, 2, 0, 2, 0, 2, 2, 0],
-                [0, 2, 2, 2, 0, 2, 0, 2, 2, 0],
-                [0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-                [2, 2, 2, 2, 0, 2, 2, 2, 2, 0],
-                [0, 2, 0, 2, 0, 0, 0, 0, 2, 0],
-                [0, 2, 0, 2, 0, 2, 2, 0, 2, 0],
-                [0, 0, 0, 0, 0, 2, 2, 0, 2, 0],
-                [0, 2, 2, 2, 0, 0, 0, 0, 2, 0],
-                [0, 0, 0, 2, 0, 2, 2, 0, 2, 0],
-                [0, 2, 0, 2, 0, 2, 0, 0, 0, 0]]
-
-level_1_spawn_locations = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 5],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 3, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                            [1, 1, 3, 1, 1, 1, 1, 3, 1, 1],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                            [3, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                            [1, 1, 1, 1, 1, 1, 1, 1, 1, 3]]
-
+level_1_board = [[2, 2, 2, 0, 2, 0, 2, 0, 0, 3],
+                [2, 0, 0, 0, 2, 0, 2, 0, 0, 2],
+                [2, 2, 2, 2, 3, 0, 2, 2, 2, 2],
+                [0, 0, 0, 0, 2, 0, 0, 0, 0, 2],
+                [2, 0, 3, 0, 2, 2, 2, 3, 0, 2],
+                [2, 0, 2, 0, 2, 0, 0, 2, 0, 2],
+                [2, 2, 2, 2, 2, 0, 0, 2, 0, 2],
+                [2, 0, 0, 0, 2, 2, 2, 2, 0, 2],
+                [5, 2, 2, 0, 2, 0, 0, 2, 0, 2],
+                [2, 0, 2, 0, 2, 0, 2, 2, 2, 3]]
 
 class Validator(object):
 
@@ -37,20 +24,19 @@ class Validator(object):
         self.vertical = vertical
 
     def validate_move_left(self):
-        if level_1_board[self.horizontal][self.vertical - 1] == 0 and self.vertical > 0:
+        if level_1_board[self.horizontal][self.vertical - 1] >= 2 and self.vertical > 0:
             return True
 
     def validate_move_right(self):
-        if level_1_board[self.horizontal][self.vertical + 1] == 0 and self.vertical < 9:
+        if level_1_board[self.horizontal][self.vertical + 1] >= 2 and self.vertical < 9:
             return True
 
     def validate_move_up(self):
-        if level_1_board[self.horizontal - 1][self.vertical] == 0 and self.horizontal > 0:
+        if level_1_board[self.horizontal - 1][self.vertical] >= 2 and self.horizontal > 0:
             return True
 
-
     def validate_move_down(self):
-        if level_1_board[self.horizontal + 1][self.vertical] == 0 and self.horizontal < 9:
+        if level_1_board[self.horizontal + 1][self.vertical] >= 2 and self.horizontal < 9:
             return True
 
 class PlayField(object):
@@ -60,20 +46,28 @@ class PlayField(object):
 
     def set_playfield(self):
         self.tile_objects = []
+        self.enemy_objects = []
         for y_coord in range(len(self.level_layout)):
             for x_coord in range(len(self.level_layout[y_coord])):
                 self.get_tile_type(y_coord, x_coord)
 
     def get_tile_type(self, y_coord, x_coord):
         if self.level_layout[y_coord][x_coord] == 0:
-            self.tile_objects.append(Floor(y_coord, x_coord))
-        else:
             self.tile_objects.append(Wall(y_coord, x_coord))
+        if self.level_layout[y_coord][x_coord] == 2:
+            self.tile_objects.append(Floor(y_coord, x_coord))
+        if self.level_layout[y_coord][x_coord] == 3:
+            self.tile_objects.append(Floor(y_coord, x_coord))
+            self.enemy_objects.append(TrashMob(y_coord, x_coord))
+        if self.level_layout[y_coord][x_coord] == 5:
+            self.tile_objects.append(Floor(y_coord, x_coord))
+            self.enemy_objects.append(Boss(y_coord, x_coord))
 
     def print_playfield(self):
         for tile in self.tile_objects:
             tile.draw()
-
+        for enemy in self.enemy_objects:
+            enemy.draw()
 
 class Tile(object):
 
@@ -103,38 +97,27 @@ class Wall(Tile):
     def draw(self):
         super().draw(self.wall)
 
-
-class Character(object):
+class Character(Tile):
 
     def __init__(self, vertical, horizontal, playfield):
-        self.size = 72
-        self.horizontal = horizontal
-        self.vertical = vertical
+        super().__init__(horizontal, vertical)
         self.playfield = level_1_board
 
-    def draw(self, pic):
-        canvas.create_image(self.vertical * self.size, self.horizontal * self.size, image = pic, anchor = NW)
+    def draw(self, hero_image):
+        super().draw(hero_image)
 
 class Hero(Character, Validator):
 
     def __init__(self, horizontal, vertical, playfield):
-        # self.health = 0
-        # self.strike = 0
-        # self.defense = 0
-        # self.playfield = level_1_board
-        self.hero_spawn = PhotoImage(file = 'assets/hero-down.png')
         self.hero_image = PhotoImage(file = 'assets/hero-down.png')
         super().__init__(horizontal, vertical, playfield)
-        super().__init__(horizontal, vertical, playfield)
-
-    def spawn(self):
-        super().draw(self.hero_spawn)
 
     def draw(self):
         self.hero_image = PhotoImage(file = 'assets/hero-down.png')
+        super().draw(self.hero_image)
 
     def hero_move_left(self, event):
-        if self.validate_move_left() == True:
+        if self.validate_move_left():
             self.hero_image = PhotoImage(file = 'assets/hero-left.png')
             self.vertical -= 1
             super().draw(self.hero_image)
@@ -142,7 +125,7 @@ class Hero(Character, Validator):
             self.hero_nomove()
 
     def hero_move_right(self, event):
-        if self.validate_move_right() == True:
+        if self.validate_move_right():
             self.hero_image = PhotoImage(file = 'assets/hero-right.png')
             self.vertical += 1
             super().draw(self.hero_image)
@@ -150,7 +133,7 @@ class Hero(Character, Validator):
             self.hero_nomove()
 
     def hero_move_up(self, event):
-        if self.validate_move_up() == True:
+        if self.validate_move_up():
             self.hero_image = PhotoImage(file = 'assets/hero-up.png')
             self.horizontal -= 1
             super().draw(self.hero_image)
@@ -158,7 +141,7 @@ class Hero(Character, Validator):
             self.hero_nomove()
 
     def hero_move_down(self, event):
-        if self.validate_move_down() == True:
+        if self.validate_move_down():
             self.hero_image = PhotoImage(file = 'assets/hero-down.png')
             self.horizontal += 1
             super().draw(self.hero_image)
@@ -169,23 +152,24 @@ class Hero(Character, Validator):
         self.horizontal += 0
         self.vertical += 0
 
-class TrashMob(Character):
+class TrashMob(Tile):
 
-    def __init__(self):
-        self.health = 0
-        self.strike = 0
-        self.defense = 0
+    def __init__(self, horizontal, vertical):
+        super().__init__(horizontal, vertical)
+        self.playfield = level_1_board
+        self.trashmob = PhotoImage(file = 'assets/skeleton.png')
 
-    # def draw(self):
+    def draw(self):
+        super().draw(self.trashmob)
 
-# class Boss(Character):
-#
-#     def __init__(self):
-#         self.health = 0
-#         self.strike = 0
-#         self.defense = 0
-#
-#     def draw(self):
+class Boss(Tile):
+
+    def __init__(self, horizontal, vertical):
+        super().__init__(horizontal, vertical)
+        self.boss = PhotoImage(file = 'assets/boss.png')
+
+    def draw(self):
+        super().draw(self.boss)
 
 
 wanderer = PlayField(level_1_board)
@@ -198,7 +182,6 @@ main.bind('<Down>', majom.hero_move_down)
 main.bind('<Up>', majom.hero_move_up)
 main.bind('<Left>', majom.hero_move_left)
 main.bind('<Right>', majom.hero_move_right)
-
 
 
 canvas.pack()
