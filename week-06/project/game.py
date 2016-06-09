@@ -106,7 +106,7 @@ class Character(Tile):
     def draw(self, hero_image):
         super().draw(hero_image)
 
-class Hero(Character, Validator):
+class Hero(Character):
 
     def __init__(self, horizontal, vertical, playfield):
         self.hero_image = PhotoImage(file = 'assets/hero-down.png')
@@ -117,7 +117,7 @@ class Hero(Character, Validator):
         super().draw(self.hero_image)
 
     def hero_move_left(self, event):
-        if self.validate_move_left():
+        if Validator.validate_move_left(self):
             self.hero_image = PhotoImage(file = 'assets/hero-left.png')
             self.vertical -= 1
             super().draw(self.hero_image)
@@ -125,7 +125,7 @@ class Hero(Character, Validator):
             self.hero_nomove()
 
     def hero_move_right(self, event):
-        if self.validate_move_right():
+        if Validator.validate_move_right(self):
             self.hero_image = PhotoImage(file = 'assets/hero-right.png')
             self.vertical += 1
             super().draw(self.hero_image)
@@ -133,7 +133,7 @@ class Hero(Character, Validator):
             self.hero_nomove()
 
     def hero_move_up(self, event):
-        if self.validate_move_up():
+        if Validator.validate_move_up(self):
             self.hero_image = PhotoImage(file = 'assets/hero-up.png')
             self.horizontal -= 1
             super().draw(self.hero_image)
@@ -141,7 +141,7 @@ class Hero(Character, Validator):
             self.hero_nomove()
 
     def hero_move_down(self, event):
-        if self.validate_move_down():
+        if Validator.validate_move_down(self):
             self.hero_image = PhotoImage(file = 'assets/hero-down.png')
             self.horizontal += 1
             super().draw(self.hero_image)
