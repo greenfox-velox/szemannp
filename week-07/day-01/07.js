@@ -1,0 +1,17 @@
+'use strict';
+
+var g1 = 123;
+var g2 = 345;
+// tell if g1 is bigger than g2
+
+if (g1 < g2) {
+    console.log('g1 is smaller')
+}
+
+else if (g1 === g2) {
+    console.log('g1 equals g2')
+}
+
+else if (g1 > g2) {
+    console.log('g1 is bigger')
+}
