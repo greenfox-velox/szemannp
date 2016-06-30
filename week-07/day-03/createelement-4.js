@@ -1,25 +1,14 @@
 var asteroids = [];
 var parent = document.querySelector('ul.asteroids');
+var child = document.querySelector('li');
 
-var asteroidList = function(array) {
-  for (i = 0; i < array.length; i++) {
-    if (array[i].asteroid) {
-      asteroids.push(array[i]);
-    }
-  }
-  return asteroids;
-};
+parent.removeChild(child);
 
-asteroidList(planetData);
-console.log(asteroids);
-
-for (i = 0; i < asteroidList.length; i++) {
-  asteroids[i].class = asteroids[i].category;
-  asteroids[i].textContent = asteroids[i].content;
-}
-
-
-for (i = 0; i < asteroids.length; i++) {
-  var newItem = asteroids[i];
-  parent.appendChild(newItem);
-}
+planetData.forEach(function (e) {
+   if (e['asteroid']) {
+     var newLi = document.createElement('li');
+     newLi.textContent = e['content'];
+     newLi.classList.add(e['category']);
+     parent.appendChild(newLi);
+   }
+ });
