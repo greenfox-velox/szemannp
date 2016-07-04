@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+.body-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  font-family: 'Titillium Web', serif;
+  height: 90px;
+  font-size: 2.5em;
+  padding-top: 35px;
+  text-align: center;
+  color: white;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 1150px;
+  height: 680px;
+  margin: 20px auto;
+  border: 0px solid black;
+}
+
+.main {
+  max-height: 510px;
+  width: auto;
+}
+
+.thumbnailpic {
+  max-height: 80px;
+  width: auto;
+}
+
+.main-gallery, .thumbnail-gallery {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 1150px;
+}
+
+.main-gallery {
+  height: 510px;
+  margin-top: 25px;
+}
+
+.arrow-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 128px;
+  height: 128px;
+}
+
+.thumb-arrow-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 128px;
+}
+
+.arrow-holder, .main-image {
+  height: 510px;
+}
+
+.main-image, .thumbnail-tile {
+  width: 894px;
+}
+
+.main-image {
+  text-align: center;
+}
+
+.thumbnail-tile, .thumb-arrow-holder, .thumbnail-gallery {
+  height: 100px;
+}
+
+.thumbnail-gallery {
+  margin-bottom: 25px;
+}
+
+.thumbnail-tile {
+  margin: auto 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-holder img {
+  width: 128px;
+  height: auto;
+}
+
+.thumb-arrow-holder img {
+  width: 48px;
+  height: auto;
+}
+
+#left-big, #right-big {
+  width: 128px;
+  height: 128px;
+}

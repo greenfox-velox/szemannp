@@ -1,5 +1,8 @@
 var imageCounter = 1;
 var imageTotal = 5;
+var leftButton = document.querySelector('.left-button');
+var rightButton = document.querySelector('.right-button');
+var heading = document.querySelector('h1');
 
 function slideImage(direction) {
   var image = document.querySelector('#image');
@@ -14,8 +17,13 @@ function slideImage(direction) {
   image.src = 'images/img_' + imageCounter + '.jpg';
 }
 
-var leftButton = document.querySelector('.left-button');
-var rightButton = document.querySelector('.right-button');
+var changeHeading = function() {
+  var userInput = prompt('Name your picture gallery!');
+  if (userInput.length < 1) {
+    userInput = 'Anon\'s gallery';
+  }
+  heading.textContent = userInput;
+}
 
 var slideImageLeft = function() {
   slideImage(-1);
@@ -27,3 +35,4 @@ var slideImageRight = function() {
 
 leftButton.addEventListener('click', slideImageLeft);
 rightButton.addEventListener('click', slideImageRight);
+heading.addEventListener('click', changeHeading);
