@@ -9,7 +9,7 @@ function Car(type, color, balance) {
   this.color = color;
   this.balance = balance;
   this.ownId = carId++;
-};
+}
 
 Car.prototype.enter = function (enterDate) {
   this.enterDate = enterDate;
