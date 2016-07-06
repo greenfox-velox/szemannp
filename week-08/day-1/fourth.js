@@ -1,56 +1,94 @@
 'use strict';
 
-// Automated CarPark system
+var carId = 0;
+var price = 40;
+var index = 0;
+
+function Car(type, color, balance) {
+  this.type = type;
+  this.color = color;
+  this.balance = balance;
+  this.ownId = carId++;
+};
+
+Car.prototype.enter = function (enterDate) {
+  this.enterDate = enterDate;
+};
+
+Car.prototype.getStats = function () {
+  return 'Type: ' + this.type + ', Color: ' + this.color + ', Balance: ' + this.balance + ', id: ' + this.ownId;
+};
+
+Car.prototype.getEnterDate = function () {
+  return this.enterDate;
+};
+
+Car.prototype.leave = function (price) {
+  this.balance -= price;
+};
+
+
+// Test objects:
+
+var tesla = new Car('Tesla', 'black', 700);
+var volvo = new Car('Volvo', 'blue', 550);
+
+// Test calls:
+
+volvo.enter(5000);
+tesla.enter(3000);
+
+console.log(tesla);
+console.log(volvo);
+console.log(tesla.getStats());
+console.log(volvo.getStats());
+console.log('enter date is: ' + volvo.getEnterDate());
+
+// ***********************       CarPark part
+
+function CarPark(income, startTime) {
+  this.income = income;
+  this.startTime = startTime;
+  this.feePerHour = 40;
+  this.parkingLot = {};
+}
+
+CarPark.prototype.carEnter = function (car) {
+  this.parkingLot[car.ownId] = car;
+  console.log('this is inside the car container object: ' + this.parkingLot);
+};
+
+CarPark.prototype.getStats = function () {
+  return 'Cars: ' + this.parkingLot.length + ', Income: ' + this.income;
+};
+
+CarPark.prototype.carLeave = function (id) {
+  delete this.parkingLot[id];
+};
+
+// Test objects
+
+var myLot = new CarPark(3800, 0);
+
+// Test calls
+
+myLot.carEnter(volvo);
+myLot.carEnter(tesla);
+
+console.log(myLot.parkingLot);
+console.log(myLot.getStats());
+
+myLot.carLeave(0);
+console.log(myLot.parkingLot);
+
+// CarPark.prototype.elapseTime = function (hours) {
 //
-// All the dates in this examples should be stored as a number
-// The milliseconds lasted from 1970-01-01
+// };
 //
-// Create a Car constructor
-// it should take 3 parameters
-//  - type: the cars type as a string (eg: 'volvo')
-//  - color: the cars type as a string (eg: 'red')
-//  - balance: the cars parking credis as a number (eg: 500)
+
+// };
 //
-// every car should have an id property (a number), that is
-// unique for all the cars, staeting form 0
+// CarPark.prototype.getParkingCarsSince = function (hours) {
+//   return
 //
-// Methods:
-// enter(enterDate)
-//  - it should store the date of entering
-//
-// getEnterDate()
-//  - it should return the date of the last entering
-//
-// leave(price)
-//  - it should decrease the balance with the price of the parking (that is given in an argument)
-//
-// getStats()
-//  - it should give back a string like:
-//    "Type: volvo, Color: red, Balance: 500"
-//
-//
-// Create a CarPark constructor
-// it should take 2 parameters
-//  - income: the initial credits as a number (eg: 4000)
-//  - startTime: the current date
-//
-// The parking fee: 40 per hours (only every whole hour)
-//
-// Methods:
-// carEnter(car)
-//  - It should add a car to the garage and add its stored startTime
-//
-// carLeave(id)
-//  - It should remove the car with the given id and it should charge from its balance
-//
-// elapseTime(hours)
-//  - It should increment the time with the hours
-//
-// Optional Methods:
-//
-// getStats()
-//  - It should return a string like:
-//    "Cars: 4, Time: 1234423453, Income: 1400"
-//
-// getParkingCarsSince(hours)
-//  - It should return the number of cars that are parking since the given hours
+// };
