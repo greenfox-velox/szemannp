@@ -1,8 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var http = require('http');
 var app = express();
 
-data = [
+var data = [
     {
         "completed": false,
         "id": 1,
@@ -19,3 +20,26 @@ data = [
         "text": "Save the world"
     }
 ];
+
+app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/*+json' }));
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser, function() {
+//
+// });
+
+
+app.get('/todos', function(req, res) {
+  res.send(json.data);
+});
+
+
+app.get('/todos/:id', function(req, res) {
+  res.send(data.filter(function (item) {
+    if (parseInt(item.id) === parseInt(req.params.id)) {
+      return item;
+    }
+  }));
+});
+
+app.listen(3000);

@@ -5,8 +5,8 @@ var app = express();
 var date = new Date();
 var currentTime = date.getHours() + ':' + date.getMinutes();
 
-app.get('/:route', function(req, res) {
-  res.send('request type: ' + req.method + '<br>' + 'req path: ' + req.params.route + '<br>' + 'date: ' + currentTime);
+app.get('*', function(req, res) {
+  res.send('request type: ' + req.method + '<br>' + 'req path: ' + req.path + '<br>' + 'date: ' + currentTime);
 });
 
 app.listen(3000);
