@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #50e3c2;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+option {
+  font-family: Lato-Light, sans-serif;
+  font-size: 26px;
+  line-height: 2.2;
+  color: #cecece;
+}
+
+.todos-container {
+  margin: 2% 10%;
+}
+
+.wrapper {
+  background-color: #f7f7f7;
+  color: #9b9b9b;
+  width: 60%;
+  align-self: center;
+}
+
+.input-container {
+  display: block;
+  justify-content: center;
+  display: flex;
+}
+
+.input-bar, .input {
+  width: 60%;
+  margin: 0;
+  display: inline;
+  height: 100%;
+  font-size: 26px;
+}
+
+.input {
+  width: 100%;
+}
+
+.input-bar, .button-container {
+  display: inline-block;
+  align-self: center;
+}
+
+#head-text {
+  color: #9b9b9b;
+  text-align: center;
+}
+
+.heading {
+  font-family: Lato-Light, sans-serif;
+  font-weight: lighter;
+  font-size: 64px;
+  color: #ffffff;
+}
+
+.todo-item {
+  font-family: Lato-Regular, sans-serif;
+  font-size: 26px;
+  line-height: 2.2;
+  color: #cecece;
+}
+
+.button-text {
+  font-family: Lato-Regular, sans-serif;
+  font-size: 26px;
+  color: #ffffff;
+}
+
+.button {
+  background-color: #df69e8;
+  border: 0px #df69e8;
+  height: 37px;
+  align-self: flex-end;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 5%;
+}
+
+.button-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0%, 5%;
+}
+
+.del {
+  margin-right: 40%;
+}

@@ -11,7 +11,7 @@ var previousThumbsetButton = document.querySelector('.previous-thumbset');
 var thumbPics = document.querySelectorAll('.thumbnailpic');
 
 var imageFolder = 'img/pics/';
-var listOfImages = ['img_1.jpg', 'img_2.jpg', 'img_3.jpg', 'img_4.jpg', 'img_5.jpg', 'img_6.jpg', 'img_7.jpg', 'img_8.jpg', 'img_9.jpg', 'img_10.jpg', 'img_11.jpg', 'img_12.jpg', 'img_13.jpg'];
+var listOfImages = ['img_1.jpg', 'img_2.jpg', 'img_3.jpg', 'img_4.jpg', 'img_5.jpg', 'img_6.jpg', 'img_7.jpg', 'img_8.jpg', 'img_9.jpg', 'img_10.jpg', 'img_11.jpg', 'img_12.jpg'];
 
 var currentImageIndex = 0;
 var currentThumbIndex = 0;
@@ -108,8 +108,7 @@ window.addEventListener('keypress', onSpacePressed);
 mainImage.setAttribute('src',setDisplayedImage(currentImageIndex));
 setThumbnailTile(currentImageIndex);
 
-function onSpacePressed()
-{
+function onSpacePressed() {
     var keyPressed = event.keyCode || event.which;
     if(keyPressed==32) {
         changeNext();
