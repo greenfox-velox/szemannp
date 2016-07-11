@@ -25,18 +25,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.get('/todos', function(req, res) {
-  res.send(data);
+  res.json(data);
 });
 
 
 app.get('/todos/:id', function(req, res) {
-  res.send(data.filter(function (item) {
+  res.json(data.filter(function (item) {
     if (parseInt(item.id) === parseInt(req.params.id)) {
       return item;
     }
   }));
 });
+
+
 
 app.listen(3000);
