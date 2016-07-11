@@ -24,13 +24,10 @@ var data = [
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser, function() {
-//
-// });
 
 
 app.get('/todos', function(req, res) {
-  res.send(json.data);
+  res.send(data);
 });
 
 
