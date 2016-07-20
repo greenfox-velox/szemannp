@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var mysql = require('mysql');
 var http = require('http');
