@@ -1,27 +1,18 @@
+'use strict';
+
 var express = require('express');
+var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var http = require('http');
-var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
-var data = [
-    {
-        "completed": false,
-        "id": 1,
-        "text": "Buy milk"
-    },
-    {
-        "completed": false,
-        "id": 2,
-        "text": "Make dinner"
-    },
-    {
-        "completed": false,
-        "id": 3,
-        "text": "Save the world"
-    }
-];
+var app = express();
+var con = mysql.createConnection ({
+  host: 'localhost',
+  user: 'root',
+  password: 'solar``7',
+  database: 'todos'
+});
 
 function errorHandler(res, id) {
   if (id === undefined) {
@@ -29,35 +20,52 @@ function errorHandler(res, id) {
   } else {
     res.send(id);
   }
-}
+};
 
-app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/*+json' }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static('./static'));
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var jsonParser = bodyParser.json();
 
-app.get('/todos', function(req, res) {
-  res.json(data);
+app.use(express.static('public'));
+
+app.use(jsonParser);
+app.use(urlencodedParser);
+
+con.connect(function (err) {
+  if (err) {
+    console.log('Error connecting to DataBase');
+  }
+  console.log('Connection established');
+});
+
+app.get('/todos/', function(req, res) {
+  con.query('SELECT * FROM todos WHERE destroyed = "false"', function (err, data) {
+    if (err) {
+      console.log(err.toString());
+    }
+    console.log('Data recieved from DB:\n');
+    console.log(data);
+    res.json(data);
+  });
 });
 
 app.get('/todos/:id', function(req, res) {
-  res.json(data.filter(function (item) {
-    if (parseInt(item.id) === parseInt(+req.params.id)) {
-      return item;
+  con.query('SELECT * FROM todos WHERE id = ' + req.params.id, function (err, data) {
+    if (err) {
+      console.log(err.toString());
     }
-  }));
+    console.log('Data recieved from DB:\n');
+    console.log(data);
+    res.json(data[1]);
+  });
 });
 
-app.post('/todos', jsonParser, function(req, res) {
-  var currentId = data.length;
-  currentId++;
-  var newTodo = {
-    'completed': false,
-    'id': currentId,
-    'text': req.body.text
-  };
-  data.push(newTodo);
-  res.send(newTodo);
+app.post('/todos', function(req, res) {
+  con.query('SELECT * FROM todos VALUES ("'+req.body.text+'")', function (err, data) {
+    if (err) {
+      console.log(err.toString());
+    }
+    res.json({id: data.insertId, text: req.body.text});
+  });
 });
 
 app.put('/todos/:id', jsonParser, function (req, res) {

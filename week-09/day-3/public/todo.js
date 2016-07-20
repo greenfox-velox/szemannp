@@ -1,15 +1,19 @@
 'use strict';
 
 var xhr = new XMLHttpRequest();
-var todos = [];
 var listShell = document.querySelector('.todos-container');
 var addButton = document.querySelector('.add');
 var inputField = document.querySelector('.input');
 
 function createBlock(element) {
   var newBlock = document.createElement('div');
+  newBlock.id = '#i' + element.id;
+  newBlock.classList.add('list-item');
   var buttonBlock = document.createElement('div');
+  buttonBlock.classList.add('button-block');
   var newDelButton = document.createElement('img');
+  newDelButton.src = 'bin.png';
+  newDelButton.className = 'del list-button';
   var newCompletedButton = document.createElement('img');
   var newListItem = document.createElement('label');
   listShell.appendChild(newBlock);
@@ -17,49 +21,42 @@ function createBlock(element) {
   newBlock.appendChild(buttonBlock);
   buttonBlock.appendChild(newDelButton);
   buttonBlock.appendChild(newCompletedButton);
-  newBlock.id = element.id;
-  newBlock.className = 'list-item';
-  buttonBlock.className = 'button-block';
-  newDelButton.src = 'bin.png';
-  newDelButton.className = 'del list-button';
   if (element.completed) {
     newCompletedButton.src = 'checked.png';
   } else {
     newCompletedButton.src = 'unchecked.png';
   }
-  newCompletedButton.className = 'status list-button' + ' ' + 'i' + element.id;
+  newCompletedButton.className = 'status list-button';
   newListItem.textContent = element.text;
-  newListItem.className = 'todo-item';
+  newListItem.classList.add('todo-item');
   newListItem.completed = 'false';
 }
 
 function processResponse(response) {
-  for (var i = 0; i < response.length; i++) {
-    if (response[i].text.length > 0) {
-      createBlock(response[i]);
+  var processedResponse = JSON.parse(response);
+  for (var i = 0; i < processedResponse.length; i++) {
+    if (processedResponse[i].text.length > 0) {
+      createBlock(processedResponse[i]);
     }
   }
 }
 
 function sendRequest() {
-  xhr.open('GET', 'https://mysterious-dusk-8248.herokuapp.com/todos', true);
-  xhr.responseType = 'json';
-  xhr.send();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200 || 201 || 202 || 304 ) {
-        todos = xhr.response;
-        processResponse(todos);
-      } else {
-        console.log('Error: ' + xhr.status);
-      }
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://localhost:3000/todos/', true);
+  xhr.setRequestHeader('content-type', 'application/json');
+  xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+  xhr.send('');
+  xhr.onload = function () {
+    if (xhr.readyState === xhr.DONE) {
+      processResponse(xhr.response);
     }
-  };
+  }
 }
 
 function addTodoItem() {
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://mysterious-dusk-8248.herokuapp.com/todos', true);
+  xhr.open('POST', 'http://localhost:3000/todos/', true);
   var toAdd = document.querySelector('input').value;
   var toAddValue = { "text": toAdd };
   xhr.onload = function(){
@@ -68,7 +65,7 @@ function addTodoItem() {
     createBlock((todos[todos.length - 1].id) + 1);
   };
   xhr.setRequestHeader('content-type', 'application/json');
-  xhr.send(JSON.stringify(toAddValue));
+  xhr.send(JSON.stringify({ text: inputdata.value} ));
   xhr.onload = function(){
     window.location.reload();
   };
@@ -77,10 +74,10 @@ function addTodoItem() {
 function removeItem(toRemoveId) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function(){
-    console.log(id);
+    console.log(toRemoveId);
     listShell.removeChild(toRemoveId);
   };
-  xhr.open('DELETE', 'https://mysterious-dusk-8248.herokuapp.com/todos/' + toRemoveId, true);
+  xhr.open('DELETE', 'http://localhost:3000/todos/' + toRemoveId, true);
   xhr.setRequestHeader('accept', 'application/json');
   xhr.send();
   xhr.onload = function() {
@@ -100,7 +97,7 @@ function eventHandler() {
 }
 
 function setCheckbox(id){
-  var toSet = document.querySelector('.i' + id);
+  var toSet = document.querySelector('#i' + id);
   toSet.src = 'checked.png';
   console.log(toSet);
   var updateStatus = {
@@ -111,7 +108,7 @@ function setCheckbox(id){
     var todos = xhr.response;
     processResponse(todos);
   };
-  xhr.open('PUT', 'https://mysterious-dusk-8248.herokuapp.com/todos/' + id);
+  xhr.open('PUT', 'http://localhost:3000/todos/' + id);
   xhr.setRequestHeader('content-type', 'application/json');
   xhr.send(JSON.stringify(updateStatus));
   xhr.onload = function() {
@@ -119,7 +116,7 @@ function setCheckbox(id){
   };
 }
 
+window.onload = sendRequest();
+
 addButton.addEventListener('click', addTodoItem);
 listShell.addEventListener('click', eventHandler);
-
-window.onload = sendRequest;
